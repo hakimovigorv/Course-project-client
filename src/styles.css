@@ -139,3 +139,21 @@
     color: #333333;
     cursor: unset;
 }
+
+.simple-cloud .tag-cloud-tag {
+    cursor: pointer;
+
+}
+
+.carousel-item{
+    overflow: hidden;
+}
+
+.carousel-item img{
+    height: 70vh;
+    max-width: none;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+}

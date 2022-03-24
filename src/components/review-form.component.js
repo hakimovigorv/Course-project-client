@@ -69,11 +69,13 @@ export default class ReviewFormComponent extends Component {
         if (this.props.match.params.id) {
             reviewService.getReview(this.props.match.params.id).then((response) => {
                 let review = response.data;
+                console.log(response.data)
                 this.setState({
                     title: review.title,
                     category: review.category,
                     full_text: review.full_text,
                     imageUrls: review.imageUrls,
+                    rating: review.authorScore,
                     tags: review.tags.map((tag) => {
                         return {"id": tag, "text": tag}
                     })
@@ -266,7 +268,7 @@ export default class ReviewFormComponent extends Component {
                         />
                     </div>
                     <label htmlFor="rating">Your rating</label>
-                    <Rating onClick={this.handleRating} ratingValue={this.state.rating} /* Available Props */ />
+                    <Rating onClick={this.handleRating} ratingValue={this.state.rating}/>
                     <div className="form-group">
                         <label htmlFor="category">Category</label>
                         <select
