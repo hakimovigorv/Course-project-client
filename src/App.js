@@ -74,13 +74,7 @@ class App extends Component {
                     </Link>
                   </li>
               )}
-              {currentUser && (
-                  <li className="nav-item">
-                    <Link to={"/user"} className="nav-link">
-                      User
-                    </Link>
-                  </li>
-              )}
+
             </div>
             {currentUser ? (
                 <div className="navbar-nav ml-auto">
@@ -91,7 +85,7 @@ class App extends Component {
                   </li>
                   <li className="nav-item">
                     <Link to={`/add-review/${currentUser.username}`} className="nav-link">
-                      Add some review
+                      Add new review
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -129,7 +123,7 @@ class App extends Component {
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
-              <Route path="/user" component={BoardUser} />
+              {/*<Route path="/user" component={BoardUser} />*/}
               <Route path="/mod" component={BoardModerator} />
               {/*<Route path="/admin" component={BoardAdmin} />*/}
               <Route path="/admin" render={props => <BoardAdmin key={props.location.key} {...props}/>} />
