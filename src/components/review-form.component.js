@@ -45,7 +45,7 @@ export default class ReviewFormComponent extends Component {
             initialImages: [],
             imageUrls: [],
             tags: [],
-            isLoaded: false,
+            isImagesLoaded: false,
             categories: [],
             suggestions: [],
             rating: 0
@@ -92,18 +92,18 @@ export default class ReviewFormComponent extends Component {
                             }).then(() => {
                                 if (this.state.initialImages.length === this.state.imageUrls.length)
                                     this.setState({
-                                        isLoaded: true
+                                        isImagesLoaded: true
                                     });
                             })
                         }))
                     })
                 } else this.setState({
-                    isLoaded : true
+                    isImagesLoaded : true
                 })
             })
         }
         else this.setState({
-            isLoaded : true
+            isImagesLoaded : true
         })
     }
 
@@ -170,10 +170,7 @@ export default class ReviewFormComponent extends Component {
                     error => {
                         const resMessage =
                             (error.response &&
-                                error.response.data &&
-                                error.response.data.message) ||
-                            error.message ||
-                            error.toString();
+                                error.response.data);
                         this.setState({
                             loading: false,
                             successful: false,
@@ -221,7 +218,7 @@ export default class ReviewFormComponent extends Component {
 
 
     render() {
-        const isLoaded = this.state.isLoaded;
+        const isImagesLoaded = this.state.isImagesLoaded;
         const initialImages = this.state.initialImages
         const handleChangeStatus = ({meta, file}, status) => {
             if (status === "done") {
@@ -305,7 +302,7 @@ export default class ReviewFormComponent extends Component {
                     </div>
 
                     <div className="form-group">
-                        {isLoaded ? (
+                        {isImagesLoaded ? (
                             <React.Fragment>
                                 <label htmlFor="images">Put some images</label>
                                 <Dropzone
