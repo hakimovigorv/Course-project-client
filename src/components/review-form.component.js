@@ -69,7 +69,6 @@ export default class ReviewFormComponent extends Component {
         if (this.props.match.params.id) {
             reviewService.getReview(this.props.match.params.id).then((response) => {
                 let review = response.data;
-                console.log(response.data)
                 this.setState({
                     title: review.title,
                     category: review.category,
@@ -155,7 +154,6 @@ export default class ReviewFormComponent extends Component {
             this.state.images.forEach(img => {
                 promises.push(
                     imageService.upload(img).then(response => {
-                        console.log(response.data)
                         this.state.imageUrls.push(response.data.secure_url)
                     })
                 )
@@ -224,20 +222,15 @@ export default class ReviewFormComponent extends Component {
 
     render() {
         const isLoaded = this.state.isLoaded;
-        //const { file } = this.state.images
         const initialImages = this.state.initialImages
         const handleChangeStatus = ({meta, file}, status) => {
-            // console.log(status, meta, file)
             if (status === "done") {
                 this.setState(
                     {images: [...this.state.images, file]}
                 )
-                // console.log(this.state.images.length)
             }
             else if (status === "removed") {
-                this.removeImage(file)
-                // console.log(this.state.images.length)
-            }
+                this.removeImage(file)}
         }
         const KeyCodes = {
             comma: 188,
@@ -245,7 +238,6 @@ export default class ReviewFormComponent extends Component {
         };
         const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-        // console.log('here:', initialImages, initialImages.length)
         return (
             <div className="container mt-5 mb-5">
 

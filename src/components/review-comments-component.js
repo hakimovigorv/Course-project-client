@@ -62,11 +62,9 @@ export default class ReviewCommentsComponent extends Component {
     }
 
     onMessage(msg) {
-        console.log(msg)
         this.setState({
             comments: [...this.state.comments, msg]
         })
-        console.log(this.state.comments)
     }
 
     render() {

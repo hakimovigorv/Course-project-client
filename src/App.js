@@ -8,8 +8,6 @@ import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 import ReviewComponent from "./components/review-component";
 import ReviewsByTagComponent from "./components/reviews-by-tag.component";
@@ -22,7 +20,6 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
     this.onChangeSearchText = this.onChangeSearchText.bind(this);
     this.state = {
-      showModeratorBoard: false,
       showAdminBoard: false,
       currentUser: undefined,
       searchText: ""
@@ -33,7 +30,6 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: user,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
       });
     }
@@ -47,7 +43,7 @@ class App extends Component {
     });
   }
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    const { currentUser, showAdminBoard } = this.state;
     return (
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -60,13 +56,6 @@ class App extends Component {
                   Home
                 </Link>
               </li>
-              {showModeratorBoard && (
-                  <li className="nav-item">
-                    <Link to={"/mod"} className="nav-link">
-                      Moderator Board
-                    </Link>
-                  </li>
-              )}
               {showAdminBoard && (
                   <li className="nav-item">
                     <Link to={"/admin"} className="nav-link">
@@ -123,9 +112,6 @@ class App extends Component {
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
-              {/*<Route path="/user" component={BoardUser} />*/}
-              <Route path="/mod" component={BoardModerator} />
-              {/*<Route path="/admin" component={BoardAdmin} />*/}
               <Route path="/admin" render={props => <BoardAdmin key={props.location.key} {...props}/>} />
               <Route path={"/add-review/:author"} render={props => <ReviewFormComponent key={props.location.key} {...props}/>}/>
               <Route path={"/review/edit/:id"} render={props => <ReviewFormComponent key={props.location.key} {...props}/>}/>
